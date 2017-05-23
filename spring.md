@@ -5,3 +5,5 @@ http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/
 http://docs.spring.io/spring-framework/docs/4.2.x/spring-framework-reference/html/index.html
 
 http://www.cnblogs.com/digdeep/p/4512368.html
+
+TransactionInterceptor
