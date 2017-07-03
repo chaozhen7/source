@@ -1,0 +1,60 @@
+*SHA256–Bit Hash Java Example*
+
+import java.security.MessageDigest;
+import java.security.SignatureException;
+String sourceString = ...; // shared secret + fields in correct format
+String hash = sha256Digest(sourceString);
+
+public String sha256Digest (String data) throws SignatureException {
+ return getDigest(“SHA-256”, data, true);
+}
+
+private String getDigest(String algorithm, String data, boolean toLower) 
+ throws SignatureException {
+  try {
+ MessageDigest mac = MessageDigest.getInstance(algorithm);
+ mac.update(data.getBytes(“UTF-8”));
+ return toLower ? 
+  new String(toHex(mac.digest())).toLowerCase() : new String(toHex(mac.digest()));
+  } catch (Exception e) {
+ throw new SignatureException(e);
+  }
+}
+
+private String toHex(byte[] bytes) {
+ BigInteger bi = new BigInteger(1, bytes);
+ return String.format(“%0” + (bytes.length << 1) + “X”, bi);
+}
+
+Note: org.apache.commons.code.digest is a useful library for generating the SHA256 hash.
+
+*SHA256–Bit Hash PHP Example*
+
+$hash = hash('sha256',$sourceString);
+
+*SHA256–Bit Hash Ruby Example*
+
+require ‘digest’
+hash = Digest::SHA256.hexdigest(sourceString)
+
+*SHA256–Bit Hash Python Example*
+
+hash = hashlib.sha256(sourceString).hexdigest()
+
+*SHA256–Bit Hash C# Example*
+
+import System.Security.Cryptography.SHA256;
+
+public string GetHashSha256(string text)
+{
+  byte[] bytes = Encoding.ASCII.GetBytes(text);
+  SHA256Managed hashstring = new SHA256Managed();
+  byte[] hash = hashstring.ComputeHash(bytes);
+  string hashString = string.Empty;
+
+  foreach (byte x in hash)
+  {
+ hashString += String.Format("{0:x2}", x);
+  }
+  return hashString;
+}
